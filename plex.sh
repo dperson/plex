@@ -70,7 +70,7 @@ elif [[ $# -ge 1 ]]; then
     echo "ERROR: command not found: $1"
     exit 13
 else
-    APPDIR="/config/Library/Application\ Support/Plex\ Media\ Server"
+    APPDIR="/config/Library/Application Support/Plex Media Server"
     rm -f "$APPDIR"/*.pid
     rm -rf /var/run/*
     mkdir -p /var/run/dbus
