@@ -82,6 +82,5 @@ else
     sleep 1
     HOME=/config start_pms &
     sleep 5
-    tail -f "$APPDIR"/Logs/**/*.log
+    tail -f $(find "$APPDIR/Logs" -iname \*.log | sed 's/^/"/; s/$/"/')
 fi
-
