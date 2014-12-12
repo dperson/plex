@@ -7,7 +7,7 @@ RUN TERM=dumb apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys\
                 E639BFCB72740199 && \
     echo "deb http://shell.ninthgate.se/packages/debian squeeze main" >> \
                 /etc/apt/sources.list && \
-    mkdir -p /config/Library/Application\ Support/Plex\ Media\ Server && \
+    mkdir -p /config/Library/Application\ Support && \
     ln -s /config /var/lib/plexmediaserver && \
     TERM=dumb apt-get update -qq && \
     TERM=dumb apt-get install -qqy --no-install-recommends plexmediaserver && \
