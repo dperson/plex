@@ -74,13 +74,15 @@ else
     rm -f "$APPDIR"/*.pid
     rm -rf /var/run/*
     mkdir -p /var/run/dbus
-    chown messagebus:messagebus /var/run/dbus
+    chown messagebus. /var/run/dbus
     dbus-uuidgen --ensure
     dbus-daemon --system --fork
     sleep 1
     avahi-daemon -D
     sleep 1
-    HOME=/config start_pms &
+    chown plex. -Rh /config
+    chown plex. /data
+    su -l plex -c "/usr/sbin/start_pms &" >/dev/null 2>&1
     sleep 5
     eval tail -f $(find "$APPDIR/Logs" -iname \*.log | sed 's/^/"/; s/$/"/')
 fi
