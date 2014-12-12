@@ -11,7 +11,8 @@ RUN TERM=dumb apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys\
     TERM=dumb apt-get install -qqy --no-install-recommends plexmediaserver && \
     TERM=dumb apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* && \
-    sed -i 's|\${HOME}|/config|' /etc/default/plexmediaserver && \
+    rm -r /var/lib/plexmediaserver && \
+    ln -s /config /var/lib/plexmediaserver && \
     mkdir -p /config/Library/Application\ Support/Plex\ Media\ Server
 
 VOLUME ["/config", "/data"]
