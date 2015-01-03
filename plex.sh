@@ -83,5 +83,5 @@ else
     chown plex. /data
     su -l plex -c "/usr/sbin/start_pms &" >/dev/null 2>&1
     sleep 5
-    eval tail -f $(find "$APPDIR/Logs" -iname \*.log | sed 's/^/"/; s/$/"/')
+    eval exec tail -f $(find "$APPDIR/Logs" -iname \*.log | sed 's/^/"/;s/$/"/')
 fi
