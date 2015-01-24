@@ -4,7 +4,6 @@ MAINTAINER David Personette <dperson@dperson.com>
 ENV DEBIAN_FRONTEND noninteractive
 
 # Install Plex
-COPY plex.sh /usr/bin/
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys\
                 E639BFCB72740199 && \
     echo "deb http://shell.ninthgate.se/packages/debian squeeze main" >> \
@@ -15,6 +14,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys\
     apt-get install -qqy --no-install-recommends plexmediaserver && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
+COPY plex.sh /usr/bin/
 
 VOLUME ["/config", "/data"]
 
