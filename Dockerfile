@@ -4,7 +4,8 @@ MAINTAINER David Personette <dperson@dperson.com>
 ENV DEBIAN_FRONTEND noninteractive
 
 # Install Plex
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys\
+RUN export DEBIAN_FRONTEND='noninteractive' && \
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys\
                 E639BFCB72740199 && \
     echo "deb http://shell.ninthgate.se/packages/debian squeeze main" >> \
                 /etc/apt/sources.list && \
