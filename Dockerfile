@@ -14,7 +14,8 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     mkdir -p /config/Library/Application\ Support && \
     ln -s /config /var/lib/plexmediaserver && \
     apt-get update -qq && \
-    apt-get install -qqy --no-install-recommends plexmediaserver && \
+    apt-get install -qqy --no-install-recommends plexmediaserver \
+                $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 COPY plex.sh /usr/bin/
