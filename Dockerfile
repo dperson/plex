@@ -3,19 +3,18 @@ MAINTAINER David Personette <dperson@dperson.com>
 
 # Install Plex
 RUN export DEBIAN_FRONTEND='noninteractive' && \
-    apt-key adv --keyserver pgp.mit.edu --recv-keys 5C808C2B65558117 && \
-    apt-key adv --keyserver pgp.mit.edu --recv-keys E639BFCB72740199 && \
-    echo "deb http://www.deb-multimedia.org jessie main non-free" >> \
-                /etc/apt/sources.list && \
-    echo "deb http://shell.ninthgate.se/packages/debian wheezy main" >> \
-                /etc/apt/sources.list && \
+    export url='https://downloads.plex.tv/plex-media-server' && \
+    export version='0.9.11.16.958-80f1748' && \
+    apt-get update -qq && \
+    apt-get install -qqy --no-install-recommends ca-certificates curl \
+                $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
     mkdir -p /config/Library/Application\ Support && \
     ln -s /config /var/lib/plexmediaserver && \
-    apt-get update -qq && \
-    apt-get install -qqy --no-install-recommends plexmediaserver \
-                $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/*
+    curl -LOC- -s $url/$version/plexmediaserver_${version}_amd64.deb && \
+    dpkg -i plexmediaserver_${version}_amd64.deb || : && \
+    apt-get purge -qqy ca-certificates curl && \
+    apt-get autoremove -qqy && apt-get clean && \
+    rm -rf /tmp/* /var/lib/apt/lists/* plexmediaserver_${version}_amd64.deb
 COPY plex.sh /usr/bin/
 
 VOLUME ["/config", "/data"]
