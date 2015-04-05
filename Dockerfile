@@ -7,7 +7,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     apt-key adv --keyserver pgp.mit.edu --recv-keys E639BFCB72740199 && \
     echo "deb http://www.deb-multimedia.org jessie main non-free" >> \
                 /etc/apt/sources.list && \
-    echo "deb http://shell.ninthgate.se/packages/debian stable main" >> \
+    echo "deb http://shell.ninthgate.se/packages/debian wheezy main" >> \
                 /etc/apt/sources.list && \
     mkdir -p /config/Library/Application\ Support && \
     ln -s /config /var/lib/plexmediaserver && \
