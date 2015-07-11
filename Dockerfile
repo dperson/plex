@@ -14,12 +14,14 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     curl -LOC- -s $url/$version/plexmediaserver_${version}_amd64.deb && \
     sha256sum plexmediaserver_${version}_amd64.deb | grep -q "$sha256sum" && \
     dpkg -i plexmediaserver_${version}_amd64.deb || : && \
+    chown plex. -Rh /config && \
+    chown plex. /data && \
     apt-get purge -qqy ca-certificates curl && \
     apt-get autoremove -qqy && apt-get clean && \
     rm -rf /tmp/* /var/lib/apt/lists/* plexmediaserver_${version}_amd64.deb
 COPY plex.sh /usr/bin/
 
-VOLUME ["/config", "/data"]
+VOLUME ["/config", "/data", "/var/run"]
 
 EXPOSE 32400
 
