@@ -1,4 +1,4 @@
-[![logo](http://macquebec.com/wp-content/uploads/2013/07/PLEX_Logo.png)](https://plex.tv/)
+[![logo](https://raw.githubusercontent.com/dperson/plex/master/logo.png)](https://plex.tv/)
 
 # Plex
 
