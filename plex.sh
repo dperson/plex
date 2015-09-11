@@ -64,6 +64,8 @@ done
 shift $(( OPTIND - 1 ))
 
 [[ "${TZ:-""}" ]] && timezone "$TZ"
+[[ "${USERID:-""}" =~ ^[0-9]+$ ]] && usermod -u $USERID plex
+[[ "${GROUPID:-""}" =~ ^[0-9]+$ ]] && usermod -g $GROUPID plex
 
 if [[ $# -ge 1 && -x $(which $1 2>&-) ]]; then
     exec "$@"
@@ -75,9 +77,9 @@ elif ps -ef | egrep -v grep | grep -q start_pms; then
 else
     APPDIR="/config/Library/Application Support/Plex Media Server"
     rm -f "$APPDIR"/*.pid
-    rm -rf /var/run/*
-    chown plex. -Rh /config
-    chown plex. /data
+    rm -rf /run/*
+    chown plex. -Rh /config 2>&1 | grep -iv 'Read-only' || :
+    chown plex. /data 2>&1 | grep -iv 'Read-only' || :
     su -l plex -c "/usr/sbin/start_pms &" >/dev/null 2>&1
     sleep 5
     eval exec tail -f $(find "$APPDIR/Logs" -iname \*.log | sed 's/^/"/;s/$/"/')
