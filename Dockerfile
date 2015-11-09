@@ -3,9 +3,9 @@ MAINTAINER David Personette <dperson@dperson.com>
 
 # Install Plex
 RUN export DEBIAN_FRONTEND='noninteractive' && \
-    export sha256sum='91154abc456c26179afe6e7fef09bad8cbe002f5e0908072ea09' && \
+    export sha256sum='3df6c79093927df1c99e95fc5e49217f9ad65e5e1ed804e9a095' && \
     export url='https://downloads.plex.tv/plex-media-server' && \
-    export version='0.9.12.18.1520-6833552' && \
+    export version='0.9.12.19.1537-f38ac80' && \
     apt-get update -qq && \
     apt-get install -qqy --no-install-recommends ca-certificates curl \
                 $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
