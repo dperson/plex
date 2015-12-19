@@ -22,8 +22,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     rm -rf /tmp/* /var/lib/apt/lists/* plexmediaserver_${version}_amd64.deb
 COPY plex.sh /usr/bin/
 
-VOLUME ["/run", "/tmp", "/var/cache", "/var/lib", "/var/log", "/var/tmp", \
-            "/config", "/data"]
+VOLUME ["/config", "/data"]
 
 EXPOSE 32400
 
