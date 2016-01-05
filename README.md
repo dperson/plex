@@ -46,7 +46,7 @@ OR use local storage:
 
     The 'command' (if provided and valid) will be run instead of plex
 
-ENVIROMENT VARIABLES (only available with `docker run`)
+ENVIRONMENT VARIABLES (only available with `docker run`)
 
  * `TZ` - As above, configure the zoneinfo timezone, IE `EST5EDT`
  * `USERID` - Set the UID for the app user
