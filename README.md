@@ -25,11 +25,11 @@ For more detailed instructions please see the
 
 ## Hosting a Plex instance
 
-    sudo docker run --name plex -p 32400:32400 -d dperson/plex
+    sudo docker run -it --name plex -p 32400:32400 -d dperson/plex
 
 OR use local storage:
 
-    sudo docker run --name plex -p 32400:32400 \
+    sudo docker run -it --name plex -p 32400:32400 \
                 -v /path/to/directory:/config \
                 -v /path/to/media:/data \
                 -d dperson/plex
@@ -55,20 +55,20 @@ ENVIRONMENT VARIABLES (only available with `docker run`)
 ## Examples
 
 Any of the commands can be run at creation with `docker run` or later with
-`docker exec plex.sh` (as of version 1.3 of docker).
+`docker exec -it plex.sh` (as of version 1.3 of docker).
 
 ### Setting the Timezone
 
-    sudo docker run --name plex -p 32400:32400 -d dperson/plex -t EST5EDT
+    sudo docker run -it --name plex -p 32400:32400 -d dperson/plex -t EST5EDT
 
 OR using `environment variables`
 
-    sudo docker run --name plex -e TZ=EST5EDT -p 32400:32400 -d dperson/plex
+    sudo docker run -it --name plex -e TZ=EST5EDT -p 32400:32400 -d dperson/plex
 
 Will get you the same settings as
 
-    sudo docker run --name plex -p 32400:32400 -d dperson/plex
-    sudo docker exec plex plex.sh -t EST5EDT ls -AlF /etc/localtime
+    sudo docker run -it --name plex -p 32400:32400 -d dperson/plex
+    sudo docker exec -it plex plex.sh -t EST5EDT ls -AlF /etc/localtime
     sudo docker restart plex
 
 # User Feedback
