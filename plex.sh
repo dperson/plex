@@ -76,6 +76,7 @@ else
     APPDIR="/config/Library/Application Support/Plex Media Server"
     rm -f "$APPDIR"/*.pid
     rm -rf /run/*
+    chmod 1777 /run
     chown plex. -Rh /config 2>&1 | grep -iv 'Read-only' || :
     chown plex. /data 2>&1 | grep -iv 'Read-only' || :
     su -l plex -c "/usr/sbin/start_pms &" >/dev/null 2>&1
