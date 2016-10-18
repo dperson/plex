@@ -7,7 +7,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     export url='https://downloads.plex.tv/plex-media-server' && \
     export version='1.1.4.2757-24ffd60' && \
     apt-get update -qq && \
-    apt-get install -qqy --no-install-recommends ca-certificates curl \
+    apt-get install -qqy --no-install-recommends ca-certificates curl gnupg1 \
                 $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
     mkdir -p /config/Library/Application\ Support && \
     ln -s /config /var/lib/plexmediaserver && \
@@ -18,7 +18,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     { mkdir -p /config /data || :; } && \
     chown plex. -Rh /config && \
     chown plex. /data && \
-    apt-get purge -qqy ca-certificates curl && \
+    apt-get purge -qqy ca-certificates curl gnupg1 && \
     apt-get autoremove -qqy && apt-get clean && \
     rm -rf /tmp/* /var/lib/apt/lists/* plexmediaserver_${version}_amd64.deb
 COPY plex.sh /usr/bin/
