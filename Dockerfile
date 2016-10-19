@@ -8,6 +8,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     export version='1.1.4.2757-24ffd60' && \
     apt-get update -qq && \
     apt-get install -qqy --no-install-recommends ca-certificates curl gnupg1 \
+                psutils \
                 $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
     mkdir -p /config/Library/Application\ Support && \
     ln -s /config /var/lib/plexmediaserver && \
