@@ -13,7 +13,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     mkdir -p /config/Library/Application\ Support && \
     ln -s /config /var/lib/plexmediaserver && \
     echo "downloading plexmediaserver_${version}_amd64.deb ..." && \
-    curl -LOC- -s $url/$version/plexmediaserver_${version}_amd64.deb && \
+    curl -LOSs $url/$version/plexmediaserver_${version}_amd64.deb && \
     sha256sum plexmediaserver_${version}_amd64.deb | grep -q "$sha256sum" && \
     { dpkg -i plexmediaserver_${version}_amd64.deb || :; } && \
     { mkdir -p /config /data || :; } && \
