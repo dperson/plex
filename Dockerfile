@@ -12,16 +12,18 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
                 $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
     mkdir -p /config/Library/Application\ Support && \
     ln -s /config /var/lib/plexmediaserver && \
-    echo "downloading plexmediaserver_${version}_amd64.deb ..." && \
-    curl -LOSs $url/$version/plexmediaserver_${version}_amd64.deb && \
-    sha256sum plexmediaserver_${version}_amd64.deb | grep -q "$sha256sum" && \
-    { dpkg -i plexmediaserver_${version}_amd64.deb || :; } && \
+    file="plexmediaserver_${version}_amd64.deb" && \
+    echo "downloading $file ..." && \
+    curl -LOSs $url/$version/$file && \
+    sha256sum $file | grep -q "$sha256sum" || \
+    { echo "expected $sha1sum, got $(sha1sum $file)"; exit; } && \
+    { dpkg -i $file || :; } && \
     { mkdir -p /config /data || :; } && \
     chown plex. -Rh /config && \
     chown plex. /data && \
     apt-get purge -qqy ca-certificates curl gnupg1 && \
     apt-get autoremove -qqy && apt-get clean && \
-    rm -rf /tmp/* /var/lib/apt/lists/* plexmediaserver_${version}_amd64.deb
+    rm -rf /tmp/* /var/lib/apt/lists/* $file
 COPY plex.sh /usr/bin/
 
 VOLUME ["/config", "/data"]
