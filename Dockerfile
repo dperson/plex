@@ -16,7 +16,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     echo "downloading $file ..." && \
     curl -LOSs $url/$version/$file && \
     sha256sum $file | grep -q "$sha256sum" || \
-    { echo "expected $sha1sum, got $(sha1sum $file)"; exit; } && \
+    { echo "expected $sha256sum, got $(sha256sum $file)"; exit 13; } && \
     { dpkg -i $file || :; } && \
     { mkdir -p /config /data || :; } && \
     chown plex. -Rh /config && \
