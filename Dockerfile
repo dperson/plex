@@ -4,7 +4,7 @@ MAINTAINER David Personette <dperson@gmail.com>
 # Install Plex
 RUN export DEBIAN_FRONTEND='noninteractive' && \
     export sha256sum='04002f06517940e4c8e64a711fac6d36b469545fcb3592b73a42' && \
-    export url='https://downloads.plex.tv/plex-media-server' && \
+    export url='https://downloads.plex.tv/plex-media-server-new' && \
     export version='1.16.3.1402-22929c8a2' && \
     apt-get update -qq && \
     apt-get install -qqy --no-install-recommends ca-certificates curl gnupg1 \
@@ -14,7 +14,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     ln -s /config /var/lib/plexmediaserver && \
     file="plexmediaserver_${version}_amd64.deb" && \
     echo "downloading $file ..." && \
-    curl -LOSs $url/$version/$file && \
+    curl -LOSs $url/$version/debian/$file && \
     sha256sum $file | grep -q "$sha256sum" || \
     { echo "expected $sha256sum, got $(sha256sum $file)"; exit 13; } && \
     { dpkg -i $file || :; } && \
