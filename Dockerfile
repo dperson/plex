@@ -3,9 +3,9 @@ MAINTAINER David Personette <dperson@gmail.com>
 
 # Install Plex
 RUN export DEBIAN_FRONTEND='noninteractive' && \
-    export sha256sum='04002f06517940e4c8e64a711fac6d36b469545fcb3592b73a42' && \
+    export sha256sum='4035e7d1fda8fa0c5d2fddc135de24d7d36b5aad2ebe3e4aa204' && \
     export url='https://downloads.plex.tv/plex-media-server-new' && \
-    export version='1.16.3.1402-22929c8a2' && \
+    export version='1.16.5.1554-1e5ff713d' && \
     apt-get update -qq && \
     apt-get install -qqy --no-install-recommends ca-certificates curl gnupg1 \
                 procps \
