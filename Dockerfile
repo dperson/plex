@@ -3,14 +3,15 @@ MAINTAINER David Personette <dperson@gmail.com>
 
 # Install Plex
 RUN export DEBIAN_FRONTEND='noninteractive' && \
-    export sha256sum='476acfdef990bfc75eafed3a3ca8543f5840c4084060874c8011' && \
+    export sha256sum='27f523d17daef3c02f5df49b7a9f57fbaccd03f41078e091d66c' && \
     export url='https://downloads.plex.tv/plex-media-server-new' && \
-    export version='1.18.7.2457-77cb9455c' && \
+    export version='1.18.8.2527-740d4c206' && \
+    groupadd -r plex && useradd -c 'Plex' -d /config -g plex -r plex && \
     apt-get update -qq && \
     apt-get install -qqy --no-install-recommends ca-certificates curl gnupg1 \
                 procps \
                 $(apt-get -s dist-upgrade|awk '/^Inst.*ecurity/ {print $2}') &&\
-    mkdir -p /config/Library/Application\ Support && \
+    mkdir -p /config/Library/Application\ Support /data && \
     ln -s /config /var/lib/plexmediaserver && \
     file="plexmediaserver_${version}_amd64.deb" && \
     echo "downloading $file ..." && \
@@ -18,7 +19,6 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     sha256sum $file | grep -q "$sha256sum" || \
     { echo "expected $sha256sum, got $(sha256sum $file)"; exit 13; } && \
     { dpkg -i $file || :; } && \
-    { mkdir -p /config /data || :; } && \
     chown plex. -Rh /config && \
     chown plex. /data && \
     apt-get purge -qqy ca-certificates curl gnupg1 && \
